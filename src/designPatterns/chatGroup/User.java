@@ -42,6 +42,7 @@ public class User implements Observer {
 		String message = scanner.next();
 
 		((ChatGroup) chatGroup).receiveMessage(this, message);
+		scanner.close();
 	}
 
 	public void sendMessage(String message) {

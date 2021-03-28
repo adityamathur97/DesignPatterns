@@ -21,7 +21,15 @@ public class ChatGroup implements Subject {
 	@Override
 	public void register(Observer user) {
 		userIdToUser.put(((User) user).getUserId(), user);
-		System.out.println(((User) user).getUserName() + " joined!");
+		System.out.println(((User) user).getUserName() + " joined " + this.chatGroupName + "!");
+	}
+
+	public String getChatGroupName() {
+		return chatGroupName;
+	}
+
+	public void setChatGroupName(String chatGroupName) {
+		this.chatGroupName = chatGroupName;
 	}
 
 	@Override
