@@ -46,7 +46,11 @@ public class User implements Observer {
 	}
 
 	public void sendMessage(String message) {
-		((ChatGroup) chatGroup).receiveMessage(this, message);
+		try {
+			((ChatGroup) chatGroup).receiveMessage(this, message);
+		} catch (Error e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String getChat() {
@@ -54,7 +58,8 @@ public class User implements Observer {
 	}
 
 	@Override
-	public void update(List<Message> chat) {
+	public void update() {
+		List<Message> chat = ((ChatGroup) chatGroup).getChat();
 		if (chat.size() > 0)
 			this.chat.add(chat.get(chat.size() - 1));
 	}

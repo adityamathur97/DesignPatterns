@@ -19,6 +19,7 @@ public class Main {
 		aditya.sendMessage("Why did Rahul leave?");
 
 		System.out.println(rahul.getChat());
+		rahul.sendMessage("Yo");
 		chatRoom.register(rahul);
 		rahul.sendMessage("Hey guys am back!");
 

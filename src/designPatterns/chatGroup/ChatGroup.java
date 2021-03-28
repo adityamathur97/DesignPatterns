@@ -24,6 +24,21 @@ public class ChatGroup implements Subject {
 		System.out.println(((User) user).getUserName() + " joined " + this.chatGroupName + "!");
 	}
 
+	@Override
+	public void unregister(Observer user) {
+		userIdToUser.remove(((User) user).getUserId());
+		System.out.println(((User) user).getUserName() + " left " + this.chatGroupName + "!");
+	}
+
+	@Override
+	public void notifyAllObservers() {
+		for (Observer user : userIdToUser.values()) {
+			user.update();
+		}
+
+		printWholeChat();
+	}
+
 	public String getChatGroupName() {
 		return chatGroupName;
 	}
@@ -32,24 +47,20 @@ public class ChatGroup implements Subject {
 		this.chatGroupName = chatGroupName;
 	}
 
-	@Override
-	public void unregister(Observer user) {
-		userIdToUser.remove(((User) user).getUserId());
+	public List<Message> getChat() {
+		return chat;
 	}
 
-	@Override
-	public void notifyAllObservers() {
-		for (Observer user : userIdToUser.values()) {
-			user.update(chat);
+	public void receiveMessage(Observer user, String userMessage) throws Error {
+		Integer userId = ((User) user).getUserId();
+
+		if (userIdToUser.containsKey(userId)) {
+			String message = ((User) user).getUserName() + ": " + userMessage;
+			chat.add(new Message(message));
+			notifyAllObservers();
+		} else {
+			throw new Error(((User) user).getUserName() + " is not part of " + chatGroupName + "!");
 		}
-
-		printWholeChat();
-	}
-
-	public void receiveMessage(Observer user, String userMessage) {
-		String message = ((User) user).getUserName() + ": " + userMessage;
-		chat.add(new Message(message));
-		notifyAllObservers();
 	}
 
 	public void printWholeChat() {
