@@ -1,10 +1,29 @@
 package designPatterns.decoratorPattern;
 
+/**
+ * Interface for different kinds of Shakes.
+ * 
+ * @author Aditya Mathur
+ *
+ */
 public interface Shakes {
 
-	public String getDescription();
+	/**
+	 * Provides a description of the shake.
+	 * 
+	 * @return Description of the shake.
+	 */
+	public String getShakeDescription();
 
-	public Double getCost();
+	/**
+	 * @return Cost of the shake.
+	 */
+	public Double getShakeCost();
 
-	public void setCost(Double cost);
+	/**
+	 * Updates the cost of the shake to the given amount.
+	 * 
+	 * @param shakeCost Updated cost of the shake.
+	 */
+	public void setShakeCost(Double shakeCost);
 }
